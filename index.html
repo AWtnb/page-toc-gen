@@ -9,18 +9,24 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
     <style>
         #app {
-            height: 95vh;
+            height: 90vh;
             display: flex;
             flex-direction: column;
         }
 
         #result {
             flex-grow: 1;
-            min-height: 250px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
         }
 
         #result textarea {
-            height: 100%;
+            flex-grow: 1;
+        }
+
+        label::after {
+            content: "\ff1a";
         }
 
         .info {
@@ -38,10 +44,10 @@
 
 <body>
     <div id="app">
-        <h1>ページ内目次</h1>
         <div id="user-input">
-            <textarea v-focus v-model="content"></textarea>
-            <label for="tagname">見出しレベルを選択：</label>
+            <label for="toc">ページ内目次</label>
+            <textarea id="toc" v-focus v-model="content"></textarea>
+            <label for="tagname">見出しレベル</label>
             <select id="tagname" v-model="tagname">
                 <option value="h1">見出し1</option>
                 <option value="h2">見出し2</option>
@@ -52,7 +58,8 @@
             </select>
         </div>
         <div id="result">
-            <textarea disabled v-model="result"></textarea>
+            <label for="markup">変換後 HTML</label>
+            <textarea id="markup" disabled v-model="result"></textarea>
         </div>
         <button @click="copyResult" :class="{done:copied}">コピー</button>
         <div class="info">
